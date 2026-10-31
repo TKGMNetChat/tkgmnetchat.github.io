@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TKGMNetChat — Kurumsal İletişim ve Belge Yönetimi</title>
+  <meta name="description" content="TKGMNetChat: uçtan uca şifreli mesajlaşma, PDF sıkıştırma, TK-Asistan ve uzaktan destek tek uygulamada." />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { navy: '#0a3572', gold: '#c8a359' },
+        fontFamily: { sans: ['"SF Pro Display"', '"Segoe UI Variable"', '"Segoe UI"', 'system-ui', 'sans-serif'] }
+      } }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .glass {
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(255,255,255,.8);
+      box-shadow: 0 1px 1px rgba(10,53,114,.05), 0 24px 48px -28px rgba(10,53,114,.35), inset 0 1px 0 #fff;
+      -webkit-backdrop-filter: blur(22px) saturate(160%); backdrop-filter: blur(22px) saturate(160%);
+    }
+    @media (prefers-color-scheme: dark) {
+      .glass {
+        background: rgba(30,38,56,.55);
+        border-color: rgba(255,255,255,.1);
+        box-shadow: 0 24px 48px -28px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08);
+      }
+    }
+    .press { transition: transform .25s cubic-bezier(.32,.72,0,1); }
+    .press:hover { transform: translateY(-2px); }
+    .press:active { transform: scale(.97); transition-duration: .08s; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .press, .press:hover, .press:active { transition: none; transform: none; }
+    }
+    @media (prefers-reduced-transparency: reduce) { .glass { -webkit-backdrop-filter: none; backdrop-filter: none; background: #fff; } }
+    @media (prefers-reduced-transparency: reduce) and (prefers-color-scheme: dark) { .glass { background: #1b2336; } }
+  </style>
+</head>
+<body class="bg-[#f4f1ea] text-slate-900 antialiased font-sans dark:bg-[#0b1220] dark:text-slate-100">
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-navy/20 blur-3xl dark:bg-navy/60"></div>
+    <div class="absolute top-[40%] -right-40 h-[420px] w-[520px] rounded-full bg-gold/25 blur-3xl dark:bg-gold/10"></div>
+  </div>
+
+  <header class="sticky top-0 z-30 px-4 pt-3">
+    <nav class="glass mx-auto flex max-w-6xl items-center justify-between rounded-full px-5 py-2.5" aria-label="Ana gezinme">
+      <a href="#" class="flex items-center gap-2.5 font-semibold tracking-tight">
+        <img src="assets/logo.png" alt="" width="28" height="28" class="h-7 w-7" />
+        TKGMNetChat
+      </a>
+      <div class="hidden items-center gap-7 text-sm text-slate-600 dark:text-slate-300 md:flex">
+        <a class="hover:text-navy dark:hover:text-white" href="#ozellikler">Özellikler</a>
+        <a class="hover:text-navy dark:hover:text-white" href="#indir">İndir</a>
+      </div>
+      <a data-release href="#indir" class="press rounded-full bg-navy px-4 py-1.5 text-sm font-medium text-white">İndir</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="mx-auto max-w-5xl px-5 pb-10 pt-20 text-center sm:pt-28">
+      <p class="mb-5 text-sm font-medium uppercase tracking-[.18em] text-gold">Tapu ve Kadastro için</p>
+      <h1 class="text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
+        TKGMNetChat: Kurumsal İletişimin ve Belge Yönetiminin <span class="text-navy dark:text-gold">Yeni Çağı</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
+        Mesajlaşma, belge işlemleri, yapay zeka ve uzaktan destek; verinizin kurumunuzda kaldığı tek bir uygulamada.
+      </p>
+      <div class="mt-9 flex flex-col items-center gap-3">
+        <a data-release href="#indir" class="press inline-flex items-center gap-3 rounded-full bg-navy px-9 py-5 text-lg font-semibold text-white shadow-[0_18px_40px_-14px_rgba(10,53,114,.7)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold">
+          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor" aria-hidden="true"><path d="M3 5.5 10.5 4.5v7H3zM11.5 4.4 21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>
+          Windows İçin İndir (v1.0.0)
+        </a>
+        <p class="text-sm text-slate-500 dark:text-slate-400">Windows 10 / 11 · 64-bit · Sonraki sürümler uygulama içinden tek tıkla gelir</p>
+      </div>
+
+      <figure class="glass mx-auto mt-16 overflow-hidden rounded-[28px] p-2 sm:p-3">
+        <img src="assets/hero-screenshot.png" onerror="this.onerror=null;this.src='assets/home-dashboard.webp'" alt="TKGMNetChat ana ekranı" width="1600" height="900" class="w-full rounded-[20px]" fetchpriority="high" />
+      </figure>
+    </section>
+
+    <section id="ozellikler" class="mx-auto max-w-6xl px-5 py-24">
+      <h2 class="max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">Günlük işin ihtiyacı olan her şey, tek pencerede.</h2>
+      <div class="mt-12 grid gap-5 md:grid-cols-6">
+        <article class="glass press rounded-3xl p-8 md:col-span-4">
+          <h3 class="text-xl font-semibold">Kesintisiz &amp; Güvenli İletişim</h3>
+          <p class="mt-3 max-w-md text-slate-600 dark:text-slate-300">Uçtan uca şifreli mesajlaşma, anketler ve ekran paylaşımı. Konuşmalar yalnızca ilgili kişiler arasında kalır.</p>
+        </article>
+        <article class="glass press rounded-3xl p-8 md:col-span-2">
+          <h3 class="text-xl font-semibold">PDF Sıkıştırma Motoru</h3>
+          <p class="mt-3 text-slate-600 dark:text-slate-300">300 sayfalık dosyaları kalite kaybı olmadan PTT KEP sınırına (100 MB) indirir.</p>
+        </article>
+        <article class="glass press rounded-3xl p-8 md:col-span-2">
+          <h3 class="text-xl font-semibold">Yapay Zeka (TK-Asistan)</h3>
+          <p class="mt-3 text-slate-600 dark:text-slate-300">Kurum içi belgelere ve mevzuata hâkim yapay zeka asistanı.</p>
+        </article>
+        <article class="glass press rounded-3xl p-8 md:col-span-4">
+          <h3 class="text-xl font-semibold">Uzaktan Destek</h3>
+          <p class="mt-3 max-w-md text-slate-600 dark:text-slate-300">Kurum içi ekran paylaşımı ve teknik destek altyapısı; yardım isteyen kişinin ekranına birkaç saniyede bağlanın.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="indir" class="mx-auto max-w-3xl px-5 pb-28 text-center">
+      <div class="glass rounded-[32px] px-6 py-14">
+        <h2 class="text-3xl font-semibold tracking-tight">Kuruluma hazır mısınız?</h2>
+        <p class="mx-auto mt-3 max-w-md text-slate-600 dark:text-slate-300">Kurulumdan sonra güncellemeler uygulamanın içinde "Yeni sürüm hazır" bildirimiyle gelir.</p>
+        <a data-release href="#" class="press mt-8 inline-block rounded-full bg-navy px-8 py-4 font-semibold text-white">Windows İçin İndir (v1.0.0)</a>
+        <details class="mx-auto mt-8 max-w-md text-left text-sm text-slate-600 dark:text-slate-300">
+          <summary class="cursor-pointer text-center font-medium text-navy dark:text-white">Windows "tanınmayan uygulama" uyarısı verirse</summary>
+          <p class="mt-3">Uygulama henüz dijital imza almadığı için Windows ilk açılışta kurulum programını tanımayabilir. Bu, uygulamanın zararlı olduğu anlamına gelmez; yalnızca imza sertifikası sürecinin sürdüğünü gösterir.</p>
+          <ol class="mt-3 list-decimal space-y-1 pl-5">
+            <li>Mavi uyarı penceresinde <strong>Daha fazla bilgi</strong> yazısına tıklayın.</li>
+            <li>Altta beliren <strong>Yine de çalıştır</strong> düğmesine basın.</li>
+            <li>Kurulum penceresi açılır; ekrandaki adımları izleyin.</li>
+          </ol>
+          <p class="mt-3">Bu adım yalnızca kurulumda bir kez gerekir.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-900/10 px-5 py-8 text-sm text-slate-500 dark:border-white/10 dark:text-slate-400">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 sm:flex-row">
+      <span>© 2026 TKGMNetChat</span>
+      <nav class="flex gap-6" aria-label="Alt bağlantılar">
+        <a data-repo class="hover:text-navy dark:hover:text-white" href="#">GitHub</a>
+        <a data-notes class="hover:text-navy dark:hover:text-white" href="#">Sürüm notları</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // GitHub bilgilerinizi buraya yazın.
+    const OWNER = 'sonosmanli55', REPO = 'TKGMNetChat-Indir';
+    const repo = `https://github.com/${OWNER}/${REPO}`;
+    document.querySelectorAll('[data-repo]').forEach(a => a.href = repo);
+    document.querySelectorAll('[data-notes]').forEach(a => a.href = `${repo}/releases`);
+    const dl = document.querySelectorAll('[data-release]');
+    fetch(`https://api.github.com/repos/${OWNER}/${REPO}/releases/latest`)
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(rel => {
+        const exes = (rel.assets || []).filter(a => /\.exe$/i.test(a.name));
+        const exe = exes.find(a => /kurulum/i.test(a.name)) || exes[0];
+        dl.forEach(a => { a.href = exe ? exe.browser_download_url : rel.html_url; });
+      })
+      .catch(() => dl.forEach(a => { a.href = `${repo}/releases/latest`; }));
+  </script>
+</body>
+</html>
