@@ -248,7 +248,12 @@ h1, h2, h3, p { margin: 0; }
 .final__title { font-family: var(--font-display); font-weight: 600; font-size: clamp(2rem, 4.4vw, 3.5rem); letter-spacing: -0.032em; color: var(--ink-deep); line-height: 1.05; margin-bottom: 36px; }
 .support { max-width: 560px; margin: clamp(72px, 10vh, 112px) auto 0; padding: 28px 32px; text-align: left; }
 .support h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.125rem; margin-bottom: 6px; }
-.support p { color: var(--ink-3); }
+.support__who { color: var(--ink-2); margin-bottom: 14px; }
+.support__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.support__list li { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--line); padding: 10px 0 2px; }
+.support__list span { width: 72px; color: var(--ink-3); font-size: 0.9375rem; }
+.support__list a { color: var(--navy); font-weight: 600; text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; overflow-wrap: anywhere; }
+@media (hover: hover) and (pointer: fine) { .support__list a:hover { text-decoration: underline; text-underline-offset: 3px; } }
 
 /* ---------- Alt bilgi ---------- */
 .foot { padding: 40px 0 56px; border-top: 1px solid var(--line); background: var(--bg); }
@@ -578,8 +583,11 @@ h1, h2, h3, p { margin: 0; }
         </div>
         <div class="support glass">
           <h3>Destek ve iletişim</h3>
-          <p>Destek bilgileri yakında burada olacak.</p>
-          <!-- YER TUTUCU: Eren destek/iletişim bilgisini buraya ekleyecek. Uydurma adres yazılmadı. -->
+          <p class="support__who">Korgan TM · Eren Kadir KILINÇ</p>
+          <ul class="support__list">
+            <li><span>Telefon</span><a href="tel:+904522801051">0452 280 10 51</a></li>
+            <li><span>E-posta</span><a href="mailto:tk47973@tkgm.gov.tr">tk47973@tkgm.gov.tr</a></li>
+          </ul>
         </div>
       </div>
     </section>
