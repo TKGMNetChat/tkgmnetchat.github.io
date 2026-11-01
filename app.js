@@ -8,7 +8,7 @@
 (() => {
   'use strict'
 
-  const FALLBACK_REPO = 'sonosmanli55/TKGMNetChat-Indir'
+  const FALLBACK_REPO = 'TKGMNetChat/tkgmnetchat.github.io'
   const RELEASE_REPOS = [
     FALLBACK_REPO,
   ]
