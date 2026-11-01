@@ -1,158 +1,602 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TKGMNetChat — Kurumsal İletişim ve Belge Yönetimi</title>
-  <meta name="description" content="TKGMNetChat: uçtan uca şifreli mesajlaşma, PDF sıkıştırma, TK-Asistan ve uzaktan destek tek uygulamada." />
-  <meta name="color-scheme" content="light dark" />
-  <link rel="icon" href="assets/logo.png" type="image/png" />
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script>
-    tailwind.config = {
-      theme: { extend: {
-        colors: { navy: '#0a3572', gold: '#c8a359' },
-        fontFamily: { sans: ['"SF Pro Display"', '"Segoe UI Variable"', '"Segoe UI"', 'system-ui', 'sans-serif'] }
-      } }
-    }
-  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TKGMNetChat — Bir Sohbetten Çok Daha Fazlası</title>
+  <meta name="description" content="TKGMNetChat: kurum içi mesajlaşma, belge ve PDF işleri, mevzuat ve günlük araçlar tek bir Windows uygulamasında.">
+  <meta name="theme-color" content="#fbfaf7">
+  <link rel="canonical" href="https://tkgmnetchat.github.io/">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:title" content="TKGMNetChat">
+  <meta property="og:description" content="Bir sohbetten çok daha fazlası. Windows için indirin.">
+  <meta property="og:image" content="https://tkgmnetchat.github.io/assets/shots/ana-sayfa-1600.webp">
+  <link rel="preload" as="image" type="image/webp" href="assets/shots/ana-sayfa-1600.webp" imagesrcset="assets/shots/ana-sayfa-960.webp 960w, assets/shots/ana-sayfa-1600.webp 1600w, assets/shots/ana-sayfa-2400.webp 2400w" imagesizes="(min-width: 1320px) 1240px, 92vw" fetchpriority="high">
   <style>
-    html { scroll-behavior: smooth; }
-    .glass {
-      background: rgba(255,255,255,.62);
-      border: 1px solid rgba(255,255,255,.8);
-      box-shadow: 0 1px 1px rgba(10,53,114,.05), 0 24px 48px -28px rgba(10,53,114,.35), inset 0 1px 0 #fff;
-      -webkit-backdrop-filter: blur(22px) saturate(160%); backdrop-filter: blur(22px) saturate(160%);
-    }
-    @media (prefers-color-scheme: dark) {
-      .glass {
-        background: rgba(30,38,56,.55);
-        border-color: rgba(255,255,255,.1);
-        box-shadow: 0 24px 48px -28px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08);
-      }
-    }
-    .press { transition: transform .25s cubic-bezier(.32,.72,0,1); }
-    .press:hover { transform: translateY(-2px); }
-    .press:active { transform: scale(.97); transition-duration: .08s; }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .press, .press:hover, .press:active { transition: none; transform: none; }
-    }
-    @media (prefers-reduced-transparency: reduce) { .glass { -webkit-backdrop-filter: none; backdrop-filter: none; background: #fff; } }
-    @media (prefers-reduced-transparency: reduce) and (prefers-color-scheme: dark) { .glass { background: #1b2336; } }
-  </style>
-</head>
-<body class="bg-[#f4f1ea] text-slate-900 antialiased font-sans dark:bg-[#0b1220] dark:text-slate-100">
-  <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-    <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-navy/20 blur-3xl dark:bg-navy/60"></div>
-    <div class="absolute top-[40%] -right-40 h-[420px] w-[520px] rounded-full bg-gold/25 blur-3xl dark:bg-gold/10"></div>
-  </div>
+/* TKGMNetChat tanıtım sitesi v3 — eski sitenin serif yazı dili + Theme B beyaz premium zemin; vurgu: kehribar (yalnız yazı, çizgi, numara; asla dolgu). */
 
-  <header class="sticky top-0 z-30 px-4 pt-3">
-    <nav class="glass mx-auto flex max-w-6xl items-center justify-between rounded-full px-5 py-2.5" aria-label="Ana gezinme">
-      <a href="#" class="flex items-center gap-2.5 font-semibold tracking-tight">
-        <img src="assets/logo.png" alt="" width="28" height="28" class="h-7 w-7" />
-        TKGMNetChat
+
+:root {
+  --bg: #fbfaf7;
+  --bg-tint: rgba(255, 255, 255, 0.5);
+  --paper: 251, 250, 247;
+  --surface: #ffffff;
+  --glass: rgba(255, 255, 255, 0.62);
+  --glass-edge: rgba(255, 255, 255, 0.9);
+  --ink: #17263b;
+  --ink-deep: #081b38;
+  --navy-soft: #245181;
+  --ink-2: #3d4a5a;
+  --ink-3: #66717f;
+  --line: rgba(12, 26, 43, 0.08);
+  --line-2: rgba(12, 26, 43, 0.14);
+  --navy: #0b3a66;
+  --navy-press: #082d50;
+  --on-navy: #ffffff;
+  --gold: #c58a2c;
+  --gold-ink: #9a4a08;
+  --accent: #b45309;
+  --grid-line: rgba(11, 58, 102, 0.07);
+
+  --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+
+  --r-window: 18px;
+  --r-inner: 11px;
+  --r-card: 16px;
+  --r-ctl: 10px;
+
+  --shadow-soft: 0 1px 2px rgba(12, 26, 43, 0.04), 0 8px 24px -14px rgba(12, 26, 43, 0.12);
+  --shadow-window: 0 1px 0 var(--glass-edge) inset, 0 2px 6px rgba(12, 26, 43, 0.04), 0 40px 90px -40px rgba(12, 26, 43, 0.28);
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+  --wrap: 1240px;
+  --gutter: clamp(16px, 5vw, 64px);
+  --section-y: clamp(104px, 15vh, 200px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1.0625rem/1.6 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+/* Theme B beyaz premium zemin: görünüme sabit katman; ortası boş kalır, metin üstünde okunur. */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(var(--paper), 0.28) 0%, rgba(var(--paper), 0.5) 55%, rgba(var(--paper), 0.72) 100%),
+    url(assets/zemin-1672.webp) center top / cover no-repeat;
+}
+@media (max-width: 900px) {
+  body::before { background: linear-gradient(180deg, rgba(var(--paper), 0.35), rgba(var(--paper), 0.75)), url(assets/zemin-1100.webp) 62% top / cover no-repeat; }
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+h1, h2, h3, p { margin: 0; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+
+.skip { position: absolute; left: 16px; top: -60px; z-index: 100; background: var(--surface); color: var(--ink); padding: 10px 14px; border-radius: var(--r-ctl); box-shadow: var(--shadow-soft); }
+.skip:focus { top: 12px; }
+
+.wrap { width: min(100% - 2 * var(--gutter), var(--wrap)); margin-inline: auto; }
+.wrap--wide { width: min(100% - 2 * var(--gutter), 1320px); }
+/* Dar metin blokları kapsayıcının sol kenarına hizalanır; yalnız satır uzunluğu sınırlanır. */
+.narrow > * { max-width: 780px; }
+
+.wordmark { font-family: var(--font-body); font-weight: 300; letter-spacing: -0.02em; color: var(--ink-deep); }
+.wordmark b { font-weight: 700; color: var(--navy); }
+
+/* ---------- Nav (yüzen cam katman) ---------- */
+.nav { position: fixed; inset: 0 0 auto; z-index: 50; transition: background-color 240ms ease, box-shadow 240ms ease; }
+.nav.is-stuck { background: rgba(var(--paper), 0.72); backdrop-filter: blur(18px) saturate(170%); -webkit-backdrop-filter: blur(18px) saturate(170%); box-shadow: 0 1px 0 var(--line); }
+.nav__in { width: min(100% - 2 * var(--gutter), var(--wrap)); margin-inline: auto; height: 60px; display: flex; align-items: center; gap: 24px; }
+.nav__brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-size: 1.125rem; }
+.nav__brand img { width: 28px; height: 28px; border-radius: 7px; }
+.nav__links { display: flex; gap: 28px; margin-left: auto; }
+.nav__links a { text-decoration: none; font-size: 0.9375rem; color: var(--ink-2); transition: color 160ms ease; }
+.nav__links a:hover { color: var(--ink); }
+
+/* ---------- Düğmeler ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--navy); color: var(--on-navy);
+  text-decoration: none; font-weight: 500; letter-spacing: -0.005em;
+  border-radius: 999px; padding: 10px 18px; font-size: 0.9375rem;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.18) inset, 0 6px 18px -8px rgba(11, 58, 102, 0.55);
+  transition: transform 140ms var(--ease-out), background-color 160ms ease;
+}
+.btn:active { transform: scale(0.97); background: var(--navy-press); }
+.btn--sm { padding: 7px 14px; font-size: 0.875rem; }
+.btn--lg { padding: 16px 28px; font-size: 1.0625rem; }
+.btn__icon { width: 20px; height: 20px; }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: var(--navy-press); } }
+
+.cta { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.cta__meta { font-size: 0.875rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+
+/* ---------- Hero ---------- */
+.hero { position: relative; padding-top: clamp(104px, 15vh, 168px); text-align: center; isolation: isolate; }
+.hero__mark { width: 56px; height: 56px; margin: 0 auto 26px; border-radius: 16px; box-shadow: var(--shadow-soft); }
+.hero .eyebrow { justify-content: center; }
+.hero__title { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.75rem, 6.2vw, 5.5rem); line-height: 0.98; letter-spacing: -0.036em; color: var(--ink-deep); }
+.hero__title > span { display: block; }
+.hero__title-top { margin-bottom: 10px; font-size: 0.6em; letter-spacing: -0.022em; color: var(--navy-soft); }
+.hero__title em, .h2 em, .final__title em { font-style: italic; color: var(--accent); }
+.hero__sub { margin: 26px auto 36px; max-width: 36rem; color: var(--ink-2); font-size: clamp(1.0625rem, 1.4vw, 1.1875rem); text-wrap: balance; }
+.hero__stage { margin-top: clamp(48px, 7vh, 80px); perspective: 1600px; padding-bottom: var(--section-y); }
+
+
+/* ---------- Pencere çerçevesi (ince cam) ---------- */
+.frame {
+  margin: 0; padding: clamp(5px, 0.6vw, 9px);
+  border-radius: var(--r-window);
+  background: var(--glass);
+  border: 1px solid var(--glass-edge);
+  outline: 1px solid var(--line); outline-offset: -1px;
+  backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: var(--shadow-window);
+}
+.frame img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--r-inner); box-shadow: 0 0 0 1px var(--line); background: var(--bg-tint); }
+.frame--hero { transform-origin: 50% 0; will-change: transform; }
+.frame--flat { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--surface); box-shadow: var(--shadow-soft); }
+
+/* ---------- Bölümler ---------- */
+.section { padding-block: var(--section-y); }
+.section--tint { background: var(--bg-tint); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 -1px 0 rgba(255, 255, 255, 0.7) inset; }
+#giris { padding-top: 0; }
+.eyebrow { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-ink); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.eyebrow::before { content: ''; width: 32px; height: 1.5px; background: var(--gold); }
+.h2 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.125rem, 4.4vw, 3.75rem); line-height: 1.05; letter-spacing: -0.032em; color: var(--ink-deep); text-wrap: balance; }
+.lede { margin-top: 24px; font-size: clamp(1.0625rem, 1.5vw, 1.25rem); color: var(--ink-2); max-width: 40rem; text-wrap: pretty; }
+.section .narrow + .wrap { margin-top: clamp(56px, 8vh, 96px); }
+.caption { margin-top: 18px; text-align: center; font-size: 0.9375rem; color: var(--ink-3); }
+
+/* ---------- Hikâye şeridi ---------- */
+.story { margin-top: clamp(88px, 12vh, 140px); }
+.story__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.story__count { font-family: var(--font-display); font-size: 1rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.story__count span { color: var(--gold-ink); }
+.story__nav { display: flex; gap: 10px; }
+.round { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line-2); background: var(--surface); color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: transform 140ms var(--ease-out), border-color 160ms ease; }
+.round svg { width: 20px; height: 20px; }
+.round:active { transform: scale(0.94); }
+.round:disabled { opacity: 0.35; cursor: default; }
+@media (hover: hover) and (pointer: fine) { .round:not(:disabled):hover { border-color: var(--ink-3); } }
+.story__track {
+  list-style: none; margin: 0; padding: 4px max(var(--gutter), calc((100vw - var(--wrap)) / 2)) 28px;
+  display: grid; grid-auto-flow: column; grid-auto-columns: min(84vw, 1040px); gap: clamp(16px, 2vw, 28px);
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: max(var(--gutter), calc((100vw - var(--wrap)) / 2));
+  scrollbar-width: none; overscroll-behavior-x: contain;
+}
+.story__track::-webkit-scrollbar { display: none; }
+.story__item { scroll-snap-align: start; }
+.story__cap { margin-top: 16px; font-family: var(--font-display); font-weight: 600; color: var(--ink-deep); font-size: 1.1875rem; letter-spacing: -0.01em; }
+.story__cap span { color: var(--gold-ink); margin-right: 10px; font-variant-numeric: tabular-nums; }
+
+/* ---------- Modül turu (yapışkan pencere) ---------- */
+.tour { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 9fr); gap: clamp(32px, 4.5vw, 72px); margin-top: clamp(24px, 4vh, 48px); width: min(100% - 2 * var(--gutter), 1320px); }
+.tour__steps { list-style: none; margin: 0; padding: 0; }
+/* Etkin adım: metin her zaman okunur (AA); vurgu altın çizgiyle ve koyulaşan renkle verilir. */
+.step { position: relative; min-height: 66vh; display: flex; flex-direction: column; justify-content: center; padding: 32px 0 32px 28px; }
+.step::before { content: ''; position: absolute; left: 0; top: calc(50% - 64px); height: 128px; width: 2px; background: var(--gold); transform: scaleY(0); transform-origin: 50% 0; transition: transform 520ms var(--ease-out); }
+.step.is-active::before { transform: none; }
+.step .step__title, .step p:not(.step__no) { color: var(--ink-3); transition: color 300ms ease; }
+.step.is-active .step__title { color: var(--ink); }
+.step.is-active p:not(.step__no) { color: var(--ink-2); }
+.step__no { font-family: var(--font-display); font-size: 0.9375rem; color: var(--gold-ink); font-variant-numeric: tabular-nums; margin-bottom: 10px; }
+.step__title { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.75rem, 2.6vw, 2.5rem); letter-spacing: -0.028em; line-height: 1.08; margin-bottom: 16px; }
+.step p:not(.step__no) { max-width: 30rem; }
+.step__note { margin-top: 12px; font-size: 0.9375rem; color: var(--ink-3) !important; }
+.step__shot { display: none; }
+.tags { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; max-width: 30rem; }
+.tags li { font-size: 0.875rem; color: var(--ink-2); padding: 6px 11px; border-radius: 7px; background: var(--surface); border: 1px solid var(--line); }
+/* Pencere dikeyde ortalanır: genişlik ≈ %66 kapsayıcı, yükseklik = genişlik × 9/16 (+ çerçeve ve sayaç). */
+.tour__stage { position: sticky; top: max(84px, calc(50vh - min(66vw, 860px) * 0.28 - 30px)); align-self: start; height: fit-content; margin-top: 12vh; }
+.frame--stage { position: relative; aspect-ratio: auto; }
+.frame--stage .layer { position: absolute; inset: clamp(5px, 0.6vw, 9px); opacity: 0; transform: scale(0.985); transition: opacity 420ms ease, transform 640ms var(--ease-out); }
+.frame--stage .layer:first-child { position: relative; inset: auto; }
+.frame--stage .layer.is-on { opacity: 1; transform: none; }
+.tour__index { margin-top: 18px; text-align: right; font-family: var(--font-display); color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.tour__index span { color: var(--gold-ink); }
+
+/* ---------- Güven ---------- */
+.trust { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 4vw, 64px); margin-top: clamp(56px, 8vh, 88px); }
+.trust__item svg { width: 32px; height: 32px; color: var(--navy); margin-bottom: 20px; }
+.trust__item h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.375rem; letter-spacing: -0.015em; color: var(--ink-deep); margin-bottom: 10px; }
+.trust__item p { color: var(--ink-2); }
+.glass { background: var(--glass); border: 1px solid var(--glass-edge); outline: 1px solid var(--line); outline-offset: -1px; border-radius: var(--r-card); box-shadow: var(--shadow-soft); backdrop-filter: blur(14px) saturate(150%); -webkit-backdrop-filter: blur(14px) saturate(150%); }
+.verify { margin-top: clamp(56px, 8vh, 88px); padding: clamp(24px, 3vw, 40px); display: grid; gap: 14px; }
+.verify h3 { font-family: var(--font-display); font-weight: 600; color: var(--ink-deep); font-size: 1.25rem; letter-spacing: -0.015em; margin-bottom: 6px; }
+.verify p { color: var(--ink-2); }
+.verify__text { margin-bottom: 8px; }
+.code { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-ctl); padding: 10px 10px 10px 16px; min-width: 0; }
+.code code { font-family: var(--font-mono); font-size: 0.875rem; color: var(--ink); flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.copy { flex: none; font: 500 0.8125rem var(--font-body); color: var(--ink); background: var(--bg-tint); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; cursor: pointer; min-height: 36px; transition: transform 140ms var(--ease-out); }
+.copy:active { transform: scale(0.96); }
+
+/* ---------- Kurulum ---------- */
+.steps3 { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 4vw, 64px); margin-top: clamp(56px, 8vh, 88px); margin-bottom: 0; }
+.steps3__no { display: block; font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 3.25rem; line-height: 1; color: var(--accent); letter-spacing: -0.04em; margin-bottom: 18px; }
+.steps3 h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.375rem; letter-spacing: -0.015em; color: var(--ink-deep); margin-bottom: 8px; }
+.steps3 p { color: var(--ink-2); }
+.faq { margin-top: clamp(88px, 12vh, 140px); }
+@media (min-width: 961px) {
+  .faq { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: clamp(32px, 4.5vw, 72px); align-items: start; }
+  .faq > * { max-width: none; grid-column: 2; }
+  .faq > .faq__title { grid-column: 1; grid-row: 1 / span 6; padding-top: 14px; }
+}
+.faq__title { font-family: var(--font-display); font-weight: 600; color: var(--ink-deep); font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.035em; margin-bottom: 20px; }
+.faq details { border-bottom: 1px solid var(--line-2); }
+.faq summary { list-style: none; cursor: pointer; padding: 22px 40px 22px 0; position: relative; font-weight: 500; font-size: 1.0625rem; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: ''; position: absolute; right: 6px; top: 50%; width: 10px; height: 10px; border-right: 1.5px solid var(--ink-3); border-bottom: 1.5px solid var(--ink-3); transform: translateY(-70%) rotate(45deg); transition: transform 200ms var(--ease-out); }
+.faq details[open] summary::after { transform: translateY(-30%) rotate(-135deg); }
+.faq details p { padding: 0 0 22px; color: var(--ink-2); max-width: 44rem; }
+.final { margin-top: clamp(104px, 14vh, 180px); text-align: center; }
+.final__title { font-family: var(--font-display); font-weight: 600; font-size: clamp(2rem, 4.4vw, 3.5rem); letter-spacing: -0.032em; color: var(--ink-deep); line-height: 1.05; margin-bottom: 36px; }
+.support { max-width: 560px; margin: clamp(72px, 10vh, 112px) auto 0; padding: 28px 32px; text-align: left; }
+.support h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.125rem; margin-bottom: 6px; }
+.support p { color: var(--ink-3); }
+
+/* ---------- Alt bilgi ---------- */
+.foot { padding: 40px 0 56px; border-top: 1px solid var(--line); background: var(--bg); }
+.foot__in { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px; font-size: 0.9375rem; color: var(--ink-3); }
+.foot__in .wordmark { color: var(--ink); font-size: 1.0625rem; }
+.foot__in nav { margin-left: auto; display: flex; gap: 24px; }
+.foot__in a { text-decoration: none; color: var(--ink-2); }
+.foot__in a:hover { color: var(--ink); }
+
+/* ---------- Giriş hareketi (JS varsa) ---------- */
+.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-out); transition-delay: var(--d, 0ms); }
+.js .reveal.is-in { opacity: 1; transform: none; }
+
+/* ---------- Duyarlı ---------- */
+@media (max-width: 960px) {
+  /* Telefonda cam bulanıklığı pahalıdır ve arkasında anlamlı içerik yoktur: düz yüzey. */
+  .frame { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--surface); }
+  .frame--hero { transform: none !important; will-change: auto; }
+  .nav__links { display: none; }
+  .nav .btn--sm { margin-left: auto; }
+  .tour { display: block; }
+  .tour__stage { display: none; }
+  .step { min-height: 0; padding: 0; margin-bottom: 88px; }
+  .step::before { display: none; }
+  .step .step__title { color: var(--ink); }
+  .step p:not(.step__no) { color: var(--ink-2); }
+  .step__shot { display: block; margin-top: 28px; }
+  .trust, .steps3 { grid-template-columns: 1fr; }
+  .foot__in nav { margin-left: 0; }
+}
+@media (max-width: 560px) {
+  .hero__mark { width: 52px; height: 52px; margin-bottom: 22px; }
+  .btn--lg { padding: 15px 24px; }
+  .code { flex-direction: column; align-items: stretch; }
+  .copy { align-self: flex-end; }
+  .story__track { grid-auto-columns: 86vw; }
+  .story__nav { display: none; }
+}
+
+/* ---------- Erişilebilirlik tercihleri ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { transform: none; transition: opacity 300ms ease; }
+  .frame--hero { transform: none !important; }
+  .frame--stage .layer { transform: none; transition: opacity 200ms ease; }
+  .step::before { transition: none; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .frame, .glass, .nav.is-stuck { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--surface); }
+}
+@media (prefers-contrast: more) {
+  :root { --line: rgba(12, 26, 43, 0.3); --line-2: rgba(12, 26, 43, 0.45); --ink-2: #1f2a37; --ink-3: #3d4a5a; }
+}
+  </style>
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a class="skip" href="#icerik">İçeriğe geç</a>
+
+  <header class="nav" id="nav">
+    <div class="nav__in">
+      <a class="nav__brand" href="#ust" aria-label="TKGMNetChat, sayfanın başı">
+        <img src="assets/logo-tk.png" alt="" width="28" height="28">
+        <span class="wordmark"><b>TKGM</b>NetChat</span>
       </a>
-      <div class="hidden items-center gap-7 text-sm text-slate-600 dark:text-slate-300 md:flex">
-        <a class="hover:text-navy dark:hover:text-white" href="#ozellikler">Özellikler</a>
-        <a class="hover:text-navy dark:hover:text-white" href="#indir">İndir</a>
-      </div>
-      <a data-release href="#indir" class="press rounded-full bg-navy px-4 py-1.5 text-sm font-medium text-white">İndir</a>
-    </nav>
+      <nav class="nav__links" aria-label="Sayfa bölümleri">
+        <a href="#giris">Giriş</a>
+        <a href="#moduller">Modüller</a>
+        <a href="#guven">Güvenlik</a>
+        <a href="#kurulum">Kurulum</a>
+      </nav>
+      <a class="btn btn--sm" data-download href="https://github.com/TKGMNetChat/tkgmnetchat.github.io/releases/latest">İndir</a>
+    </div>
   </header>
 
-  <main>
-    <section class="mx-auto max-w-5xl px-5 pb-10 pt-20 text-center sm:pt-28">
-      <p class="mb-5 text-sm font-medium uppercase tracking-[.18em] text-gold">Tapu ve Kadastro için</p>
-      <h1 class="text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
-        TKGMNetChat: Kurumsal İletişimin ve Belge Yönetiminin <span class="text-navy dark:text-gold">Yeni Çağı</span>
-      </h1>
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
-        Mesajlaşma, belge işlemleri, yapay zeka ve uzaktan destek; verinizin kurumunuzda kaldığı tek bir uygulamada.
-      </p>
-      <div class="mt-9 flex flex-col items-center gap-3">
-        <a data-release href="#indir" class="press inline-flex items-center gap-3 rounded-full bg-navy px-9 py-5 text-lg font-semibold text-white shadow-[0_18px_40px_-14px_rgba(10,53,114,.7)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold">
-          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor" aria-hidden="true"><path d="M3 5.5 10.5 4.5v7H3zM11.5 4.4 21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>
-          Windows İçin İndir (v1.0.1 · 382 MB)
-        </a>
-        <p class="text-sm text-slate-500 dark:text-slate-400">Windows 10 / 11 · 64-bit · Sonraki sürümler uygulama içinden tek tıkla gelir</p>
+  <main id="icerik">
+    <!-- a) HERO -->
+    <section class="hero" id="ust" aria-labelledby="hero-title">
+      <div class="wrap hero__copy">
+        <img class="hero__mark" src="assets/logo-tk.png" alt="" width="72" height="72">
+        <p class="eyebrow">TKGMNetChat · Windows uygulaması</p>
+        <h1 id="hero-title" class="hero__title">
+          <span class="hero__title-top">Geçmişten Geleceğe...</span>
+          <span>Bir Sohbetten</span>
+          <span><em>Çok Daha Fazlası</em></span>
+        </h1>
+        <p class="hero__sub">Mesajlaşma, belge ve PDF işleri, mevzuat ve günlük araçlar. Tek bir Windows uygulamasında.</p>
+        <div class="cta">
+          <a class="btn btn--lg" data-download href="https://github.com/TKGMNetChat/tkgmnetchat.github.io/releases/latest">
+            <svg class="btn__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v9m0 0-3.5-3.5M10 12l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Windows için indir
+          </a>
+          <p class="cta__meta"><span data-version>v1.0.1</span> · <span data-size>382 MB</span> · Windows 10 ve 11, 64 bit</p>
+        </div>
       </div>
-
-      <figure class="glass mx-auto mt-16 overflow-hidden rounded-[28px] p-2 sm:p-3">
-        <img src="assets/home-dashboard.webp" alt="TKGMNetChat ana ekranı" width="1600" height="900" class="w-full rounded-[20px]" fetchpriority="high" />
-      </figure>
-    </section>
-
-    <section id="ozellikler" class="mx-auto max-w-6xl px-5 py-24">
-      <h2 class="max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">Günlük işin ihtiyacı olan her şey, tek pencerede.</h2>
-      <div class="mt-12 grid gap-5 md:grid-cols-6">
-        <article class="glass press rounded-3xl p-8 md:col-span-4">
-          <h3 class="text-xl font-semibold">Kesintisiz &amp; Güvenli İletişim</h3>
-          <p class="mt-3 max-w-md text-slate-600 dark:text-slate-300">Uçtan uca şifreli mesajlaşma, anketler ve ekran paylaşımı. Konuşmalar yalnızca ilgili kişiler arasında kalır.</p>
-        </article>
-        <article class="glass press rounded-3xl p-8 md:col-span-2">
-          <h3 class="text-xl font-semibold">PDF Sıkıştırma Motoru</h3>
-          <p class="mt-3 text-slate-600 dark:text-slate-300">300 sayfalık dosyaları kalite kaybı olmadan PTT KEP sınırına (100 MB) indirir.</p>
-        </article>
-        <article class="glass press rounded-3xl p-8 md:col-span-2">
-          <h3 class="text-xl font-semibold">Yapay Zeka (TK-Asistan)</h3>
-          <p class="mt-3 text-slate-600 dark:text-slate-300">Kurum içi belgelere ve mevzuata hâkim yapay zeka asistanı.</p>
-        </article>
-        <article class="glass press rounded-3xl p-8 md:col-span-4">
-          <h3 class="text-xl font-semibold">Uzaktan Destek</h3>
-          <p class="mt-3 max-w-md text-slate-600 dark:text-slate-300">Kurum içi ekran paylaşımı ve teknik destek altyapısı; yardım isteyen kişinin ekranına birkaç saniyede bağlanın.</p>
-        </article>
+      <div class="wrap wrap--wide hero__stage">
+        <figure class="frame frame--hero" id="hero-frame">
+          <img src="assets/shots/ana-sayfa-1600.webp"
+               srcset="assets/shots/ana-sayfa-960.webp 960w, assets/shots/ana-sayfa-1600.webp 1600w, assets/shots/ana-sayfa-2400.webp 2400w"
+               sizes="(min-width: 1320px) 1240px, 92vw" width="1920" height="1080" fetchpriority="high"
+               alt="TKGMNetChat ana sayfası: solda modül menüsü, ortada kısayollar, duyurular ve günün özeti.">
+        </figure>
       </div>
     </section>
 
-    <section id="indir" class="mx-auto max-w-3xl px-5 pb-28 text-center">
-      <div class="glass rounded-[32px] px-6 py-14">
-        <h2 class="text-3xl font-semibold tracking-tight">Kuruluma hazır mısınız?</h2>
-        <p class="mx-auto mt-3 max-w-md text-slate-600 dark:text-slate-300">Kurulumdan sonra güncellemeler uygulamanın içinde "Yeni sürüm hazır" bildirimiyle gelir.</p>
-        <a data-release href="#" class="press mt-8 inline-block rounded-full bg-navy px-8 py-4 font-semibold text-white">Windows İçin İndir (v1.0.1 · 382 MB)</a>
-        <details class="mx-auto mt-8 max-w-md text-left text-sm text-slate-600 dark:text-slate-300">
-          <summary class="cursor-pointer text-center font-medium text-navy dark:text-white">Windows "tanınmayan uygulama" uyarısı verirse</summary>
-          <p class="mt-3">Uygulama henüz dijital imza almadığı için Windows ilk açılışta kurulum programını tanımayabilir. Bu, uygulamanın zararlı olduğu anlamına gelmez; yalnızca imza sertifikası sürecinin sürdüğünü gösterir.</p>
-          <ol class="mt-3 list-decimal space-y-1 pl-5">
-            <li>Mavi uyarı penceresinde <strong>Daha fazla bilgi</strong> yazısına tıklayın.</li>
-            <li>Altta beliren <strong>Yine de çalıştır</strong> düğmesine basın.</li>
-            <li>Kurulum penceresi açılır; ekrandaki adımları izleyin.</li>
-          </ol>
-          <p class="mt-3">Bu adım yalnızca kurulumda bir kez gerekir.</p>
+    <!-- b) GİRİŞ DENEYİMİ -->
+    <section class="section" id="giris" aria-labelledby="giris-title">
+      <div class="wrap narrow reveal">
+        <p class="eyebrow">01 / Mülkiyetin Hafızası</p>
+        <h2 id="giris-title" class="h2">Her açılış, <em>kısa bir hikâyeyle</em> başlar.</h2>
+        <p class="lede">Uygulama, beş bölümlük bir anlatıyla açılır: kâtibin masasındaki haritadan bugünün kentine. İsterseniz izleyin, isterseniz tek tıkla girişe geçin.</p>
+      </div>
+      <div class="wrap reveal">
+        <figure class="frame">
+          <img src="assets/shots/giris-1600.webp"
+               srcset="assets/shots/giris-960.webp 960w, assets/shots/giris-1600.webp 1600w, assets/shots/giris-2400.webp 2400w"
+               sizes="(min-width: 1320px) 1240px, 92vw" width="1920" height="1080" loading="lazy" decoding="async"
+               alt="Kurumsal giriş ekranı: ortada sicil numarası ve parola alanları, Sisteme Gir ve Davet Kodum Var düğmeleri.">
+        </figure>
+        <p class="caption">Giriş ekranı. Sicil numaranız ve parolanızla girersiniz.</p>
+      </div>
+
+      <div class="story" aria-label="Giriş hikâyesinin bölümleri">
+        <div class="story__head wrap">
+          <p class="story__count" aria-hidden="true"><span id="story-now">01</span> / 05</p>
+          <div class="story__nav">
+            <button type="button" class="round" data-story="-1" aria-label="Önceki bölüm"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12 4.5 6.5 10l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button type="button" class="round" data-story="1" aria-label="Sonraki bölüm"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 4.5 5.5 5.5L8 15.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+        <ol class="story__track" id="story-track" tabindex="0" aria-label="Hikâye bölümleri, yatay kaydırılabilir">
+          <li class="story__item">
+            <figure class="frame frame--flat"><img src="assets/shots/hikaye-1-1600.webp" srcset="assets/shots/hikaye-1-960.webp 960w, assets/shots/hikaye-1-1600.webp 1600w" sizes="(min-width: 1200px) 1040px, 84vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Hikâyenin ilk bölümü: masasında harita çizen bir kâtip, arkada boğaz ve dağlar."></figure>
+            <p class="story__cap"><span>01</span> Bir Sohbetten Fazlası</p>
+          </li>
+          <li class="story__item">
+            <figure class="frame frame--flat"><img src="assets/shots/hikaye-2-1600.webp" srcset="assets/shots/hikaye-2-960.webp 960w, assets/shots/hikaye-2-1600.webp 1600w" sizes="(min-width: 1200px) 1040px, 84vw" width="1920" height="1080" loading="lazy" decoding="async" alt="İkinci bölüm, Güçlü Modüller: sahne kente doğru açılır."></figure>
+            <p class="story__cap"><span>02</span> Güçlü Modüller</p>
+          </li>
+          <li class="story__item">
+            <figure class="frame frame--flat"><img src="assets/shots/hikaye-3-1600.webp" srcset="assets/shots/hikaye-3-960.webp 960w, assets/shots/hikaye-3-1600.webp 1600w" sizes="(min-width: 1200px) 1040px, 84vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Üçüncü bölüm, Ortak Çalışma Alanı: tarihî harita ile bugünün kenti yan yana."></figure>
+            <p class="story__cap"><span>03</span> Ortak Çalışma Alanı</p>
+          </li>
+          <li class="story__item">
+            <figure class="frame frame--flat"><img src="assets/shots/hikaye-4-1600.webp" srcset="assets/shots/hikaye-4-960.webp 960w, assets/shots/hikaye-4-1600.webp 1600w" sizes="(min-width: 1200px) 1040px, 84vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Dördüncü bölüm, Belgeler Konuşmanın Parçası: kentin üzerinde parsel çizgileri."></figure>
+            <p class="story__cap"><span>04</span> Belgeler Konuşmanın Parçası</p>
+          </li>
+          <li class="story__item">
+            <figure class="frame frame--flat"><img src="assets/shots/hikaye-5-1600.webp" srcset="assets/shots/hikaye-5-960.webp 960w, assets/shots/hikaye-5-1600.webp 1600w" sizes="(min-width: 1200px) 1040px, 84vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Beşinci bölüm, Kurumsal Hafıza: hikâye giriş ekranına bağlanır."></figure>
+            <p class="story__cap"><span>05</span> Kurumsal Hafıza</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- c) MODÜLLER -->
+    <section class="section section--tint" id="moduller" aria-labelledby="mod-title">
+      <div class="wrap narrow reveal">
+        <p class="eyebrow">02 / Modüller</p>
+        <h2 id="mod-title" class="h2">Her iş için bir modül. <em>Hepsi tek pencerede.</em></h2>
+        <p class="lede">Kaydırdıkça uygulamanın gerçek ekranlarını görün.</p>
+      </div>
+
+      <div class="wrap tour">
+        <ol class="tour__steps" id="tour-steps">
+          <li class="step" data-shot="ana-sayfa" data-alt="Ana sayfa: kısayollar, duyurular ve günün özeti.">
+            <p class="step__no">01</p><h3 class="step__title">Ana Sayfa</h3>
+            <p>Güne tek ekrandan başlayın. Kısayollar, duyurular ve çevrimiçi çalışma arkadaşları bir arada. Düzeni sürükleyip bırakarak kendinize göre ayarlayın.</p>
+            <figure class="frame frame--flat step__shot"><img src="assets/shots/ana-sayfa-960.webp" srcset="assets/shots/ana-sayfa-960.webp 960w, assets/shots/ana-sayfa-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Ana sayfa: kısayollar, duyurular ve günün özeti."></figure>
+          </li>
+          <li class="step" data-shot="ag-haritasi" data-alt="Ağ Haritası: yerel ağ görünümü ve Türkiye geneli çevrimiçi kullanıcı listesi. Kişi bilgisi örnekle değiştirildi.">
+            <p class="step__no">02</p><h3 class="step__title">Ağ Haritası</h3>
+            <p>Kimin çevrimiçi olduğunu canlı bir listede, son görülme bilgisiyle görün.</p>
+            <p class="step__note">Yerel ağ harita görünümü geliştiriliyor. Bu sürümde canlı liste hazır.</p>
+            <figure class="frame frame--flat step__shot"><img src="assets/shots/ag-haritasi-960.webp" srcset="assets/shots/ag-haritasi-960.webp 960w, assets/shots/ag-haritasi-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Ağ Haritası: yerel ağ görünümü ve Türkiye geneli çevrimiçi kullanıcı listesi. Kişi bilgisi örnekle değiştirildi."></figure>
+          </li>
+          <li class="step" data-shot="messenger" data-alt="Messenger: bir sohbet; mesajlar, paylaşılan PDF dosyası ve bir anket, üstte arama düğmeleri.">
+            <p class="step__no">03</p><h3 class="step__title">Messenger</h3>
+            <p>Birebir ve grup sohbetleri. Dosya, sesli not ve anket gönderin; sesli ve görüntülü arayın, ekranınızı paylaşın. Mesaj ve dosya içerikleri şifrelenir.</p>
+            <p class="step__note">Görseldeki kişiler ve mesajlar örnektir.</p>
+            <figure class="frame frame--flat step__shot"><img src="assets/shots/messenger-960.webp" srcset="assets/shots/messenger-960.webp 960w, assets/shots/messenger-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Messenger: bir sohbet; mesajlar, paylaşılan PDF dosyası ve bir anket, üstte arama düğmeleri."></figure>
+          </li>
+          <li class="step" data-shot="muzik" data-alt="Müzik Çalar: radyo istasyonları, türe göre filtre ve seçili istasyon.">
+            <p class="step__no">04</p><h3 class="step__title">Müzik Çalar</h3>
+            <p>Çalışırken arka planda radyo ve müzik. Yüzlerce istasyon, türe ve ülkeye göre filtre, favoriler. YouTube’dan da müzik açabilirsiniz.</p>
+            <figure class="frame frame--flat step__shot"><img src="assets/shots/muzik-960.webp" srcset="assets/shots/muzik-960.webp 960w, assets/shots/muzik-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Müzik Çalar: radyo istasyonları, türe göre filtre ve seçili istasyon."></figure>
+          </li>
+          <li class="step" data-shot="tapu-hesaplari" data-alt="Tapu Hesapları: 3/8 pay hesabı, hisse dağılımı ve taşınmaz özeti.">
+            <p class="step__no">05</p><h3 class="step__title">Tapu Hesapları</h3>
+            <p>Pay/payda, hisse dağılımı, miras ve tapu harcı hesapları. 3/8 gibi kesirli girişleri anlar, sonucu tek tıkla kopyalarsınız.</p>
+            <figure class="frame frame--flat step__shot"><img src="assets/shots/tapu-hesaplari-960.webp" srcset="assets/shots/tapu-hesaplari-960.webp 960w, assets/shots/tapu-hesaplari-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Tapu Hesapları: 3/8 pay hesabı, hisse dağılımı ve taşınmaz özeti."></figure>
+          </li>
+          <li class="step" data-shot="belge-pdf" data-alt="Belge ve PDF Merkezi başlangıç ekranı: PDF aç, oluştur, tara, ilmühaber hazırla ve boyut düşür.">
+            <p class="step__no">06</p><h3 class="step__title">Belge &amp; PDF Merkezi</h3>
+            <p>Belgenin bütün yolculuğu tek yerde: tarayın, okuyun, düzenleyin, gönderin.</p>
+            <ul class="tags" aria-label="Belge ve PDF Merkezi yetenekleri">
+              <li>Tarama</li><li>Metin tanıma (OCR)</li><li>PDF düzenleme</li><li>Damga</li><li>İmza</li><li>Filigran</li><li>İlmühaber</li><li>Sıkıştırma</li><li>Görsel iyileştirme</li>
+            </ul>
+            <figure class="frame frame--flat step__shot"><img src="assets/shots/belge-pdf-960.webp" srcset="assets/shots/belge-pdf-960.webp 960w, assets/shots/belge-pdf-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Belge ve PDF Merkezi başlangıç ekranı: PDF aç, oluştur, tara, ilmühaber hazırla ve boyut düşür."></figure>
+          </li>
+          <li class="step" data-shot="mevzuat" data-alt="Mevzuat Bankası: kategorilere ayrılmış mevzuat listesi ve arama alanı.">
+            <p class="step__no">07</p><h3 class="step__title">Mevzuat Bankası</h3>
+            <p>Kanun, yönetmelik, genelge ve talimatlar kategori kategori. Adıyla arayın, yan panelde okuyun ya da PDF Merkezi’nde açın. Liste günde bir kez denetlenir.</p>
+            <figure class="frame frame--flat step__shot"><img src="assets/shots/mevzuat-960.webp" srcset="assets/shots/mevzuat-960.webp 960w, assets/shots/mevzuat-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Mevzuat Bankası: kategorilere ayrılmış mevzuat listesi ve arama alanı."></figure>
+          </li>
+          <li class="step" data-shot="namaz" data-alt="Namaz Vakitleri: günün vakitleri ve sonraki vakte kalan süre.">
+            <p class="step__no">08</p><h3 class="step__title">Namaz Vakitleri</h3>
+            <p>İl ve ilçenize göre Diyanet vakitleri ve sonraki vakte kalan süre. Zikirmatik ve kaza namazı çizelgesi de burada.</p>
+            <figure class="frame frame--flat step__shot"><img src="assets/shots/namaz-960.webp" srcset="assets/shots/namaz-960.webp 960w, assets/shots/namaz-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Namaz Vakitleri: günün vakitleri ve sonraki vakte kalan süre."></figure>
+          </li>
+          <li class="step" data-shot="tk-asistan" data-alt="TK-Asistan bağlantı ekranı: kendi Google anahtarınızla üç adımda bağlanma.">
+            <p class="step__no">09</p><h3 class="step__title">TK-Asistan</h3>
+            <p>Google Gemini ile çalışan yardımcı. Kendi anahtarınızla çalışır; anahtar yalnızca sizin bilgisayarınızda saklanır.</p>
+            <figure class="frame frame--flat step__shot"><img src="assets/shots/tk-asistan-960.webp" srcset="assets/shots/tk-asistan-960.webp 960w, assets/shots/tk-asistan-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="TK-Asistan bağlantı ekranı: kendi Google anahtarınızla üç adımda bağlanma."></figure>
+          </li>
+          <li class="step" data-shot="hazircevap" data-alt="TK-HazırCevap: kategorilere ayrılmış hazır yanıt şablonları.">
+            <p class="step__no">10</p><h3 class="step__title">TK-HazırCevap</h3>
+            <p>Sık yazılan yanıtlar hazır: bilgilendirme, eksik evrak, hatalı evrak ve başvuru kapatma. Seçin, kopyalayın, gönderin.</p>
+            <figure class="frame frame--flat step__shot"><img src="assets/shots/hazircevap-960.webp" srcset="assets/shots/hazircevap-960.webp 960w, assets/shots/hazircevap-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="TK-HazırCevap: kategorilere ayrılmış hazır yanıt şablonları."></figure>
+          </li>
+          <li class="step" data-shot="kuran" data-alt="Kur’an-ı Kerim: Arapça metin ve Türkçe meal yan yana.">
+            <p class="step__no">11</p><h3 class="step__title">Kur’an-ı Kerim</h3>
+            <p>Arapça metin ve Türkçe meal yan yana. Sesli dinleyin, not alın, favorilerinizi işaretleyin.</p>
+            <figure class="frame frame--flat step__shot"><img src="assets/shots/kuran-960.webp" srcset="assets/shots/kuran-960.webp 960w, assets/shots/kuran-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Kur’an-ı Kerim: Arapça metin ve Türkçe meal yan yana."></figure>
+          </li>
+          <li class="step" data-shot="yonetim" data-alt="Yönetim Merkezi: kullanıcılar, roller ve onaylar ekranı. Kişi bilgileri örnek değerlerle değiştirildi.">
+            <p class="step__no">12</p><h3 class="step__title">Yönetim Merkezi</h3>
+            <p>Yalnızca yetkili yöneticiler için: kullanıcılar, roller, bekleyen onaylar ve işlemlerin denetim kaydı.</p>
+            <figure class="frame frame--flat step__shot"><img src="assets/shots/yonetim-960.webp" srcset="assets/shots/yonetim-960.webp 960w, assets/shots/yonetim-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Yönetim Merkezi: kullanıcılar, roller ve onaylar ekranı. Kişi bilgileri örnek değerlerle değiştirildi."></figure>
+          </li>
+          <li class="step" data-shot="profil" data-alt="Profil ve Ayarlar: kimlik, iletişim, şifre ve sürüm bilgisi. Sicil ve e-posta gizlendi.">
+            <p class="step__no">13</p><h3 class="step__title">Profil &amp; Ayarlar</h3>
+            <p>Fotoğraf, iletişim bilgileri, durum ve şifre. Uygulama sürümünü ve güncellemeleri buradan denetleyin.</p>
+            <figure class="frame frame--flat step__shot"><img src="assets/shots/profil-960.webp" srcset="assets/shots/profil-960.webp 960w, assets/shots/profil-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Profil ve Ayarlar: kimlik, iletişim, şifre ve sürüm bilgisi. Sicil ve e-posta gizlendi."></figure>
+          </li>
+        </ol>
+        <div class="tour__stage" aria-hidden="true">
+          <figure class="frame frame--stage" id="tour-frame"></figure>
+          <p class="tour__index"><span id="tour-now">01</span> / 13</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- d) GÜVENLİK -->
+    <section class="section" id="guven" aria-labelledby="guven-title">
+      <div class="wrap narrow reveal">
+        <p class="eyebrow">03 / Güvenlik</p>
+        <h2 id="guven-title" class="h2">Güvenlik, <em>açık ve dürüst.</em></h2>
+      </div>
+      <div class="wrap trust">
+        <article class="trust__item reveal">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="7" y="14" width="18" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 14v-3a5 5 0 0 1 10 0v3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <h3>İçerikler şifrelenir</h3>
+          <p>Mesaj ve dosya içerikleri şifrelenerek gönderilir.</p>
+        </article>
+        <article class="trust__item reveal">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5 7 9v6c0 5.5 3.8 10 9 12 5.2-2 9-6.5 9-12V9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="m12 16 3 3 5-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Dosyanızı doğrulayın</h3>
+          <p>İndirdiğiniz dosyanın değişmediğini SHA256 özetiyle kontrol edebilirsiniz.</p>
+        </article>
+        <article class="trust__item reveal">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 6 4 26h24z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M16 13v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="22.5" r="1" fill="currentColor"/></svg>
+          <h3>Windows uyarısı normaldir</h3>
+          <p>Kurulum dosyası henüz dijital olarak imzalı değil. Bu yüzden Windows ilk açılışta “tanınmayan uygulama” diyebilir.</p>
+        </article>
+      </div>
+      <div class="wrap reveal">
+        <div class="verify glass">
+          <div class="verify__text">
+            <h3>Dosya özeti (SHA256)</h3>
+            <p>PowerShell’de bu komutu çalıştırın. Çıkan değer, alttaki özetle aynı olmalı.</p>
+          </div>
+          <div class="code"><code id="cmd">Get-FileHash .\TKGMNetChat-Kurulum-1.0.1.exe -Algorithm SHA256</code><button type="button" class="copy" data-copy="#cmd">Kopyala</button></div>
+          <div class="code"><code id="hash" class="hash">1ef6d59f4f2ce2cd70c7bd74f69dfb73aba2281d6cdebda9ed01f3aef0da4526</code><button type="button" class="copy" data-copy="#hash">Kopyala</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- e) KURULUM -->
+    <section class="section section--tint" id="kurulum" aria-labelledby="kur-title">
+      <div class="wrap narrow reveal">
+        <p class="eyebrow">04 / Kurulum</p>
+        <h2 id="kur-title" class="h2">Üç adımda <em>hazır.</em></h2>
+      </div>
+      <ol class="wrap steps3">
+        <li class="reveal"><span class="steps3__no">1</span><h3>İndirin</h3><p>“Windows için indir” düğmesine basın, dosyayı kaydedin.</p></li>
+        <li class="reveal"><span class="steps3__no">2</span><h3>Çalıştırın</h3><p>Dosyaya çift tıklayın. Kurulum yönetici izni istemez.</p></li>
+        <li class="reveal"><span class="steps3__no">3</span><h3>Giriş yapın</h3><p>Uygulama açılınca sicil numaranız ve parolanızla girin.</p></li>
+      </ol>
+
+      <div class="wrap narrow faq reveal">
+        <h3 class="faq__title">Sık sorulanlar</h3>
+        <details>
+          <summary>Windows “bilgisayarınız korundu” dedi. Ne yapmalıyım?</summary>
+          <p>Uyarıdaki <strong>Ek bilgi</strong> (bazı sürümlerde “Daha fazla bilgi”) bağlantısına, ardından <strong>Yine de çalıştır</strong> düğmesine basın. Uyarı, dosya henüz imzalı olmadığı için çıkar. Emin olmak için önce dosya özetini kontrol edin.</p>
         </details>
+        <details>
+          <summary>Hangi bilgisayarlarda çalışır?</summary>
+          <p>Windows 10 ve Windows 11, 64 bit.</p>
+        </details>
+        <details>
+          <summary>Kurmak için yönetici izni gerekir mi?</summary>
+          <p>Hayır. Uygulama yalnızca sizin kullanıcı klasörünüze kurulur. Kurum bilgisayarına kurmadan önce BT biriminize haber vermenizi öneririz.</p>
+        </details>
+        <details>
+          <summary>Hesabım yok. Nasıl girerim?</summary>
+          <p>Giriş ekranındaki <strong>Davet Kodum Var</strong> düğmesiyle, size verilen davet koduyla hesabınızı oluşturabilirsiniz.</p>
+        </details>
+        <details>
+          <summary>Güncellemeler nasıl gelir?</summary>
+          <p>Uygulama yeni sürümü kendisi denetler ve indirir. Kurulum için onayınızı ister. Profil &amp; Ayarlar’dan elle de denetleyebilirsiniz.</p>
+        </details>
+        <details>
+          <summary>İndirdiğim dosyanın doğru olduğunu nasıl anlarım?</summary>
+          <p>Güvenlik bölümündeki komutla dosyanın SHA256 özetini alın ve sayfadaki değerle karşılaştırın. Aynıysa dosya değişmemiştir.</p>
+        </details>
+      </div>
+
+      <div class="wrap final reveal">
+        <h2 class="final__title">Hazırsanız, <em>başlayalım.</em></h2>
+        <div class="cta">
+          <a class="btn btn--lg" data-download href="https://github.com/TKGMNetChat/tkgmnetchat.github.io/releases/latest">
+            <svg class="btn__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v9m0 0-3.5-3.5M10 12l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Windows için indir
+          </a>
+          <p class="cta__meta"><span data-version>v1.0.1</span> · <span data-size>382 MB</span> · Windows 10 ve 11, 64 bit</p>
+        </div>
+        <div class="support glass">
+          <h3>Destek ve iletişim</h3>
+          <p>Destek bilgileri yakında burada olacak.</p>
+          <!-- YER TUTUCU: Eren destek/iletişim bilgisini buraya ekleyecek. Uydurma adres yazılmadı. -->
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="border-t border-slate-900/10 px-5 py-8 text-sm text-slate-500 dark:border-white/10 dark:text-slate-400">
-    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 sm:flex-row">
-      <span>© 2026 TKGMNetChat</span>
-      <nav class="flex gap-6" aria-label="Alt bağlantılar">
-        <a data-repo class="hover:text-navy dark:hover:text-white" href="#">GitHub</a>
-        <a data-notes class="hover:text-navy dark:hover:text-white" href="#">Sürüm notları</a>
+  <footer class="foot">
+    <div class="wrap foot__in">
+      <span class="wordmark"><b>TKGM</b>NetChat</span>
+      <p>Tasarım ve geliştirme: Eren Kadir Kılınç</p>
+      <nav aria-label="Alt bağlantılar">
+        <a href="https://github.com/TKGMNetChat/tkgmnetchat.github.io/releases">Tüm sürümler</a>
+        <a href="#guven">Güvenlik</a>
+        <a href="#kurulum">Kurulum</a>
       </nav>
     </div>
   </footer>
 
-  <script>
-    // GitHub bilgilerinizi buraya yazın.
-    const OWNER = 'TKGMNetChat', REPO = 'tkgmnetchat.github.io';
-    const repo = `https://github.com/${OWNER}/${REPO}`;
-    document.querySelectorAll('[data-repo]').forEach(a => a.href = repo);
-    document.querySelectorAll('[data-notes]').forEach(a => a.href = `${repo}/releases`);
-    const dl = document.querySelectorAll('[data-release]');
-    fetch(`https://api.github.com/repos/${OWNER}/${REPO}/releases/latest`)
-      .then(r => r.ok ? r.json() : Promise.reject())
-      .then(rel => {
-        const exes = (rel.assets || []).filter(a => /\.exe$/i.test(a.name));
-        const exe = exes.find(a => /kurulum/i.test(a.name)) || exes[0];
-        dl.forEach(a => {
-          a.href = exe ? exe.browser_download_url : rel.html_url;
-          if (exe) a.textContent = `Windows İçin İndir (${rel.tag_name} · ${Math.round(exe.size / 1048576)} MB)`;
-        });
-      })
-      .catch(() => dl.forEach(a => { a.href = `${repo}/releases/latest`; }));
-  </script>
+  <script src="app.js" defer></script>
 </body>
 </html>
