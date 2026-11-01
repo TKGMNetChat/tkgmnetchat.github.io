@@ -74,7 +74,7 @@
       <div class="mt-9 flex flex-col items-center gap-3">
         <a data-release href="#indir" class="press inline-flex items-center gap-3 rounded-full bg-navy px-9 py-5 text-lg font-semibold text-white shadow-[0_18px_40px_-14px_rgba(10,53,114,.7)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold">
           <svg viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor" aria-hidden="true"><path d="M3 5.5 10.5 4.5v7H3zM11.5 4.4 21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>
-          Windows İçin İndir (v1.0.0)
+          Windows İçin İndir (v1.0.1 · 382 MB)
         </a>
         <p class="text-sm text-slate-500 dark:text-slate-400">Windows 10 / 11 · 64-bit · Sonraki sürümler uygulama içinden tek tıkla gelir</p>
       </div>
@@ -110,7 +110,7 @@
       <div class="glass rounded-[32px] px-6 py-14">
         <h2 class="text-3xl font-semibold tracking-tight">Kuruluma hazır mısınız?</h2>
         <p class="mx-auto mt-3 max-w-md text-slate-600 dark:text-slate-300">Kurulumdan sonra güncellemeler uygulamanın içinde "Yeni sürüm hazır" bildirimiyle gelir.</p>
-        <a data-release href="#" class="press mt-8 inline-block rounded-full bg-navy px-8 py-4 font-semibold text-white">Windows İçin İndir (v1.0.0)</a>
+        <a data-release href="#" class="press mt-8 inline-block rounded-full bg-navy px-8 py-4 font-semibold text-white">Windows İçin İndir (v1.0.1 · 382 MB)</a>
         <details class="mx-auto mt-8 max-w-md text-left text-sm text-slate-600 dark:text-slate-300">
           <summary class="cursor-pointer text-center font-medium text-navy dark:text-white">Windows "tanınmayan uygulama" uyarısı verirse</summary>
           <p class="mt-3">Uygulama henüz dijital imza almadığı için Windows ilk açılışta kurulum programını tanımayabilir. Bu, uygulamanın zararlı olduğu anlamına gelmez; yalnızca imza sertifikası sürecinin sürdüğünü gösterir.</p>
@@ -147,7 +147,10 @@
       .then(rel => {
         const exes = (rel.assets || []).filter(a => /\.exe$/i.test(a.name));
         const exe = exes.find(a => /kurulum/i.test(a.name)) || exes[0];
-        dl.forEach(a => { a.href = exe ? exe.browser_download_url : rel.html_url; });
+        dl.forEach(a => {
+          a.href = exe ? exe.browser_download_url : rel.html_url;
+          if (exe) a.textContent = `Windows İçin İndir (${rel.tag_name} · ${Math.round(exe.size / 1048576)} MB)`;
+        });
       })
       .catch(() => dl.forEach(a => { a.href = `${repo}/releases/latest`; }));
   </script>
