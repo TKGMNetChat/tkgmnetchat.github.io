@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TKGMNetChat — Bir Sohbetten Çok Daha Fazlası</title>
-  <meta name="description" content="TKGMNetChat: kurum içi mesajlaşma, belge ve PDF işleri, mevzuat ve günlük araçlar tek bir Windows uygulamasında.">
+  <meta name="description" content="TKGMNetChat: Tapu ve Kadastro çalışanları için şifreli mesajlaşma, belge ve PDF merkezi, mevzuat bankası, tapu hesapları ve günlük araçlar tek bir Windows uygulamasında.">
   <meta name="theme-color" content="#fbfaf7">
   <link rel="canonical" href="https://tkgmnetchat.github.io/">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
@@ -198,6 +198,7 @@ h1, h2, h3, p { margin: 0; }
 .step__no { font-family: var(--font-display); font-size: 0.9375rem; color: var(--gold-ink); font-variant-numeric: tabular-nums; margin-bottom: 10px; }
 .step__title { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.75rem, 2.6vw, 2.5rem); letter-spacing: -0.028em; line-height: 1.08; margin-bottom: 16px; }
 .step p:not(.step__no) { max-width: 30rem; }
+.step__use { margin-top: 14px; }
 .step__note { margin-top: 12px; font-size: 0.9375rem; color: var(--ink-3) !important; }
 .step__shot { display: none; }
 .tags { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; max-width: 30rem; }
@@ -334,13 +335,13 @@ h1, h2, h3, p { margin: 0; }
     <section class="hero" id="ust" aria-labelledby="hero-title">
       <div class="wrap hero__copy">
         <img class="hero__mark" src="assets/logo-tk.png" alt="" width="72" height="72">
-        <p class="eyebrow">TKGMNetChat · Windows uygulaması</p>
+        <p class="eyebrow">Tapu ve Kadastro Çalışanları için.. · Windows uygulaması</p>
         <h1 id="hero-title" class="hero__title">
           <span class="hero__title-top">Geçmişten Geleceğe...</span>
           <span>Bir Sohbetten</span>
           <span><em>Çok Daha Fazlası</em></span>
         </h1>
-        <p class="hero__sub">Mesajlaşma, belge ve PDF işleri, mevzuat ve günlük araçlar. Tek bir Windows uygulamasında.</p>
+        <p class="hero__sub">Yazışma, belge ve PDF işleri, mevzuat, hesaplar ve günlük araçlar. Tapu ve Kadastro çalışanlarının her gün ihtiyaç duyduğu her şey, tek bir Windows uygulamasında.</p>
         <div class="cta">
           <a class="btn btn--lg" data-download href="https://github.com/TKGMNetChat/tkgmnetchat.github.io/releases/latest/download/TKGMNetChat-Kurulum.exe">
             <svg class="btn__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v9m0 0-3.5-3.5M10 12l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -372,7 +373,7 @@ h1, h2, h3, p { margin: 0; }
           <img src="assets/shots/giris-1600.webp"
                srcset="assets/shots/giris-960.webp 960w, assets/shots/giris-1600.webp 1600w, assets/shots/giris-2400.webp 2400w"
                sizes="(min-width: 1320px) 1240px, 92vw" width="1920" height="1080" loading="lazy" decoding="async"
-               alt="Kurumsal giriş ekranı: ortada sicil numarası ve parola alanları, Sisteme Gir ve Davet Kodum Var düğmeleri.">
+               alt="Giriş ekranı: ortada sicil numarası ve parola alanları, Sisteme Gir ve Davet Kodum Var düğmeleri.">
         </figure>
         <p class="caption">Giriş ekranı. Sicil numaranız ve parolanızla girersiniz.</p>
       </div>
@@ -415,79 +416,74 @@ h1, h2, h3, p { margin: 0; }
       <div class="wrap narrow reveal">
         <p class="eyebrow">02 / Modüller</p>
         <h2 id="mod-title" class="h2">Her iş için bir modül. <em>Hepsi tek pencerede.</em></h2>
-        <p class="lede">Kaydırdıkça uygulamanın gerçek ekranlarını görün.</p>
+        <p class="lede">On üç modülün her biri, günlük işte somut bir ihtiyaca karşılık gelir. Kaydırdıkça hangisinin ne işe yaradığını ve size ne kazandırdığını uygulamanın gerçek ekranlarıyla görün.</p>
       </div>
 
       <div class="wrap tour">
         <ol class="tour__steps" id="tour-steps">
           <li class="step" data-shot="ana-sayfa" data-alt="Ana sayfa: kısayollar, duyurular ve günün özeti.">
             <p class="step__no">01</p><h3 class="step__title">Ana Sayfa</h3>
-            <p>Güne tek ekrandan başlayın. Kısayollar, duyurular ve çevrimiçi çalışma arkadaşları bir arada. Düzeni sürükleyip bırakarak kendinize göre ayarlayın.</p>
+            <p>Uygulamayı açtığınızda karşınıza çıkan başlangıç noktası. Sık kullandığınız modüllere kısayollar, kurum duyuruları, çevrimiçi çalışma arkadaşlarınız ve günün özeti tek ekranda toplanır. Kartları sürükleyip bırakarak düzeni kendi çalışma şeklinize göre değiştirirsiniz.</p><p class="step__use"><strong>Size ne kazandırır?</strong> Modüller arasında aramadan, güne tek bakışla başlarsınız. Duyuruları kaçırmaz, ihtiyacınız olan araca tek tıkla ulaşırsınız.</p>
             <figure class="frame frame--flat step__shot"><img src="assets/shots/ana-sayfa-960.webp" srcset="assets/shots/ana-sayfa-960.webp 960w, assets/shots/ana-sayfa-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Ana sayfa: kısayollar, duyurular ve günün özeti."></figure>
           </li>
           <li class="step" data-shot="ag-haritasi" data-alt="Ağ Haritası: yerel ağ görünümü ve Türkiye geneli çevrimiçi kullanıcı listesi. Kişi bilgisi örnekle değiştirildi.">
             <p class="step__no">02</p><h3 class="step__title">Ağ Haritası</h3>
-            <p>Kimin çevrimiçi olduğunu canlı bir listede, son görülme bilgisiyle görün.</p>
-            <p class="step__note">Yerel ağ harita görünümü geliştiriliyor. Bu sürümde canlı liste hazır.</p>
+            <p>Kurum ağında şu an kimlerin çevrimiçi olduğunu canlı bir listede, son görülme bilgisiyle gösterir. Yerel ağdaki bilgisayarlar ile Türkiye genelindeki çalışma arkadaşlarınız aynı ekranda görünür.</p><p class="step__use"><strong>Size ne kazandırır?</strong> Birine ulaşmadan önce müsait olup olmadığını bilirsiniz. Boşuna aramaz, doğru kişiye doğru zamanda yazarsınız.</p><p class="step__note">Yerel ağ harita görünümü geliştiriliyor. Bu sürümde canlı liste hazır.</p>
             <figure class="frame frame--flat step__shot"><img src="assets/shots/ag-haritasi-960.webp" srcset="assets/shots/ag-haritasi-960.webp 960w, assets/shots/ag-haritasi-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Ağ Haritası: yerel ağ görünümü ve Türkiye geneli çevrimiçi kullanıcı listesi. Kişi bilgisi örnekle değiştirildi."></figure>
           </li>
           <li class="step" data-shot="messenger" data-alt="Messenger: bir sohbet; mesajlar, paylaşılan PDF dosyası ve bir anket, üstte arama düğmeleri.">
             <p class="step__no">03</p><h3 class="step__title">Messenger</h3>
-            <p>Birebir ve grup sohbetleri. Dosya, sesli not ve anket gönderin; sesli ve görüntülü arayın, ekranınızı paylaşın. Mesaj ve dosya içerikleri şifrelenir.</p>
-            <p class="step__note">Görseldeki kişiler ve mesajlar örnektir.</p>
+            <p>Kurum içi yazışmanın merkezi. Birebir ve grup sohbetleri açar, dosya ve sesli not gönderir, anket yapar, sesli ve görüntülü arama yapar, ekranınızı paylaşırsınız. Mesaj ve dosya içerikleri şifrelenerek iletilir.</p><p class="step__use"><strong>Size ne kazandırır?</strong> Telefon, e-posta ve dosya paylaşımı için ayrı ayrı araç kullanmazsınız. Yazışma, belge ve görüşme aynı yerde kalır; konuşmalar yalnızca ilgili kişiler arasında görünür.</p><ul class="tags" aria-label="Messenger yetenekleri"><li>Birebir ve grup</li><li>Dosya ve sesli not</li><li>Anket</li><li>Sesli ve görüntülü arama</li><li>Ekran paylaşımı</li><li>Şifreli içerik</li></ul><p class="step__note">Görseldeki kişiler ve mesajlar örnektir.</p>
             <figure class="frame frame--flat step__shot"><img src="assets/shots/messenger-960.webp" srcset="assets/shots/messenger-960.webp 960w, assets/shots/messenger-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Messenger: bir sohbet; mesajlar, paylaşılan PDF dosyası ve bir anket, üstte arama düğmeleri."></figure>
           </li>
           <li class="step" data-shot="muzik" data-alt="Müzik Çalar: radyo istasyonları, türe göre filtre ve seçili istasyon.">
             <p class="step__no">04</p><h3 class="step__title">Müzik Çalar</h3>
-            <p>Çalışırken arka planda radyo ve müzik. Yüzlerce istasyon, türe ve ülkeye göre filtre, favoriler. YouTube’dan da müzik açabilirsiniz.</p>
+            <p>Çalışırken arka planda dinleyebileceğiniz radyo ve müzik çalar. Yüzlerce istasyonu türe ve ülkeye göre süzer, sevdiklerinizi favorilere ekler, isterseniz YouTube’dan da müzik açarsınız.</p><p class="step__use"><strong>Size ne kazandırır?</strong> Müzik için ayrı bir tarayıcı sekmesi ya da program açmadan, çalışma penceresinden çıkmadan dinlersiniz.</p>
             <figure class="frame frame--flat step__shot"><img src="assets/shots/muzik-960.webp" srcset="assets/shots/muzik-960.webp 960w, assets/shots/muzik-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Müzik Çalar: radyo istasyonları, türe göre filtre ve seçili istasyon."></figure>
           </li>
           <li class="step" data-shot="tapu-hesaplari" data-alt="Tapu Hesapları: 3/8 pay hesabı, hisse dağılımı ve taşınmaz özeti.">
             <p class="step__no">05</p><h3 class="step__title">Tapu Hesapları</h3>
-            <p>Pay/payda, hisse dağılımı, miras ve tapu harcı hesapları. 3/8 gibi kesirli girişleri anlar, sonucu tek tıkla kopyalarsınız.</p>
+            <p>Tapu işlemlerinde sık gereken hesapları yapar: pay/payda, hisse dağılımı, miras paylaşımı ve tapu harcı. 3/8 gibi kesirli girişleri olduğu gibi anlar, sonucu tek tıkla kopyalamanızı sağlar.</p><p class="step__use"><strong>Size ne kazandırır?</strong> Elle ya da hesap makinesiyle yapılan işlem hatalarını azaltır. Sonucu yazışmaya ya da belgeye hemen aktarırsınız.</p>
             <figure class="frame frame--flat step__shot"><img src="assets/shots/tapu-hesaplari-960.webp" srcset="assets/shots/tapu-hesaplari-960.webp 960w, assets/shots/tapu-hesaplari-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Tapu Hesapları: 3/8 pay hesabı, hisse dağılımı ve taşınmaz özeti."></figure>
           </li>
           <li class="step" data-shot="belge-pdf" data-alt="Belge ve PDF Merkezi başlangıç ekranı: PDF aç, oluştur, tara, ilmühaber hazırla ve boyut düşür.">
             <p class="step__no">06</p><h3 class="step__title">Belge &amp; PDF Merkezi</h3>
-            <p>Belgenin bütün yolculuğu tek yerde: tarayın, okuyun, düzenleyin, gönderin.</p>
-            <ul class="tags" aria-label="Belge ve PDF Merkezi yetenekleri">
-              <li>Tarama</li><li>Metin tanıma (OCR)</li><li>PDF düzenleme</li><li>Damga</li><li>İmza</li><li>Filigran</li><li>İlmühaber</li><li>Sıkıştırma</li><li>Görsel iyileştirme</li>
-            </ul>
+            <p>Belgenin bütün yolculuğunu tek yerde toplar: tarayın, okuyun, düzenleyin ve gönderin. Taranan sayfadaki yazıyı metne çevirir (OCR), PDF’ye damga, imza ve filigran ekler, ilmühaber hazırlar, dosyayı gönderilebilir boyuta indirir.</p><p class="step__use"><strong>Size ne kazandırır?</strong> Tarayıcı, PDF düzenleyici ve sıkıştırma için ayrı programlar aramazsınız. Büyük dosyalar kurumsal gönderim sınırlarına sığar, belge Messenger’dan da doğrudan paylaşılır.</p><ul class="tags" aria-label="Belge ve PDF Merkezi yetenekleri"><li>Tarama</li><li>Metin tanıma (OCR)</li><li>PDF düzenleme</li><li>Damga</li><li>İmza</li><li>Filigran</li><li>İlmühaber</li><li>Sıkıştırma</li><li>Görsel iyileştirme</li></ul>
             <figure class="frame frame--flat step__shot"><img src="assets/shots/belge-pdf-960.webp" srcset="assets/shots/belge-pdf-960.webp 960w, assets/shots/belge-pdf-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Belge ve PDF Merkezi başlangıç ekranı: PDF aç, oluştur, tara, ilmühaber hazırla ve boyut düşür."></figure>
           </li>
           <li class="step" data-shot="mevzuat" data-alt="Mevzuat Bankası: kategorilere ayrılmış mevzuat listesi ve arama alanı.">
             <p class="step__no">07</p><h3 class="step__title">Mevzuat Bankası</h3>
-            <p>Kanun, yönetmelik, genelge ve talimatlar kategori kategori. Adıyla arayın, yan panelde okuyun ya da PDF Merkezi’nde açın. Liste günde bir kez denetlenir.</p>
+            <p>Kanun, yönetmelik, genelge ve talimatları kategori kategori bir araya getirir. Adıyla arar, yan panelde okur ya da PDF Merkezi’nde açıp üzerinde çalışırsınız. Liste günde bir kez otomatik denetlenir.</p><p class="step__use"><strong>Size ne kazandırır?</strong> Güncel mevzuatı bulmak için sitelerde dolaşmazsınız. Dayanak metin işinizin yanında, birkaç saniyede açılır.</p>
             <figure class="frame frame--flat step__shot"><img src="assets/shots/mevzuat-960.webp" srcset="assets/shots/mevzuat-960.webp 960w, assets/shots/mevzuat-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Mevzuat Bankası: kategorilere ayrılmış mevzuat listesi ve arama alanı."></figure>
           </li>
           <li class="step" data-shot="namaz" data-alt="Namaz Vakitleri: günün vakitleri ve sonraki vakte kalan süre.">
             <p class="step__no">08</p><h3 class="step__title">Namaz Vakitleri</h3>
-            <p>İl ve ilçenize göre Diyanet vakitleri ve sonraki vakte kalan süre. Zikirmatik ve kaza namazı çizelgesi de burada.</p>
+            <p>İl ve ilçenize göre Diyanet vakitlerini, sonraki vakte kalan süreyi gösterir. Zikirmatik ve kaza namazı çizelgesi de aynı modüldedir.</p><p class="step__use"><strong>Size ne kazandırır?</strong> Mesai içinde vakti kaçırmazsınız. Ayrı bir uygulama ya da web sitesine ihtiyaç duymazsınız.</p>
             <figure class="frame frame--flat step__shot"><img src="assets/shots/namaz-960.webp" srcset="assets/shots/namaz-960.webp 960w, assets/shots/namaz-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Namaz Vakitleri: günün vakitleri ve sonraki vakte kalan süre."></figure>
           </li>
           <li class="step" data-shot="tk-asistan" data-alt="TK-Asistan bağlantı ekranı: kendi Google anahtarınızla üç adımda bağlanma.">
             <p class="step__no">09</p><h3 class="step__title">TK-Asistan</h3>
-            <p>Google Gemini ile çalışan yardımcı. Kendi anahtarınızla çalışır; anahtar yalnızca sizin bilgisayarınızda saklanır.</p>
+            <p>Google Gemini ile çalışan yardımcınız. Sorularınızı yanıtlar, metin yazmanıza ve düzenlemenize yardım eder. Üç adımda, kendi Google anahtarınızla bağlanırsınız; anahtar yalnızca sizin bilgisayarınızda saklanır.</p><p class="step__use"><strong>Size ne kazandırır?</strong> Yazışma taslağı, özet ve kısa araştırma gibi işleri hızlandırır. Anahtar sizde kaldığı için kullanımı siz yönetirsiniz.</p>
             <figure class="frame frame--flat step__shot"><img src="assets/shots/tk-asistan-960.webp" srcset="assets/shots/tk-asistan-960.webp 960w, assets/shots/tk-asistan-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="TK-Asistan bağlantı ekranı: kendi Google anahtarınızla üç adımda bağlanma."></figure>
           </li>
           <li class="step" data-shot="hazircevap" data-alt="TK-HazırCevap: kategorilere ayrılmış hazır yanıt şablonları.">
             <p class="step__no">10</p><h3 class="step__title">TK-HazırCevap</h3>
-            <p>Sık yazılan yanıtlar hazır: bilgilendirme, eksik evrak, hatalı evrak ve başvuru kapatma. Seçin, kopyalayın, gönderin.</p>
+            <p>Sık yazılan yanıtların hazır şablonları: bilgilendirme, eksik evrak, hatalı evrak ve başvuru kapatma. Kategoriden seçer, kopyalar ve gönderirsiniz.</p><p class="step__use"><strong>Size ne kazandırır?</strong> Aynı cümleleri her seferinde yeniden yazmazsınız. Vatandaşa verilen yanıtlar tutarlı ve hızlı olur.</p>
             <figure class="frame frame--flat step__shot"><img src="assets/shots/hazircevap-960.webp" srcset="assets/shots/hazircevap-960.webp 960w, assets/shots/hazircevap-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="TK-HazırCevap: kategorilere ayrılmış hazır yanıt şablonları."></figure>
           </li>
           <li class="step" data-shot="kuran" data-alt="Kur’an-ı Kerim: Arapça metin ve Türkçe meal yan yana.">
             <p class="step__no">11</p><h3 class="step__title">Kur’an-ı Kerim</h3>
-            <p>Arapça metin ve Türkçe meal yan yana. Sesli dinleyin, not alın, favorilerinizi işaretleyin.</p>
+            <p>Arapça metin ve Türkçe meal yan yana okunur. Sesli dinleyebilir, not alabilir, favori ayetlerinizi işaretleyebilirsiniz.</p><p class="step__use"><strong>Size ne kazandırır?</strong> Mola sırasında okumak ya da dinlemek için ayrı bir uygulama açmanız gerekmez; notlarınız ve favorileriniz yanınızda kalır.</p>
             <figure class="frame frame--flat step__shot"><img src="assets/shots/kuran-960.webp" srcset="assets/shots/kuran-960.webp 960w, assets/shots/kuran-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Kur’an-ı Kerim: Arapça metin ve Türkçe meal yan yana."></figure>
           </li>
           <li class="step" data-shot="yonetim" data-alt="Yönetim Merkezi: kullanıcılar, roller ve onaylar ekranı. Kişi bilgileri örnek değerlerle değiştirildi.">
             <p class="step__no">12</p><h3 class="step__title">Yönetim Merkezi</h3>
-            <p>Yalnızca yetkili yöneticiler için: kullanıcılar, roller, bekleyen onaylar ve işlemlerin denetim kaydı.</p>
+            <p>Yalnızca yetkili yöneticiler için. Kullanıcıları ve rollerini yönetir, bekleyen onayları değerlendirir, yapılan işlemlerin denetim kaydını izlersiniz.</p><p class="step__use"><strong>Size ne kazandırır?</strong> Kimin neye erişebildiği açık ve denetlenebilir olur. Yeni kullanıcı onayları ve yetki değişiklikleri tek yerden yürür.</p>
             <figure class="frame frame--flat step__shot"><img src="assets/shots/yonetim-960.webp" srcset="assets/shots/yonetim-960.webp 960w, assets/shots/yonetim-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Yönetim Merkezi: kullanıcılar, roller ve onaylar ekranı. Kişi bilgileri örnek değerlerle değiştirildi."></figure>
           </li>
           <li class="step" data-shot="profil" data-alt="Profil ve Ayarlar: kimlik, iletişim, şifre ve sürüm bilgisi. Sicil ve e-posta gizlendi.">
             <p class="step__no">13</p><h3 class="step__title">Profil &amp; Ayarlar</h3>
-            <p>Fotoğraf, iletişim bilgileri, durum ve şifre. Uygulama sürümünü ve güncellemeleri buradan denetleyin.</p>
+            <p>Fotoğrafınız, iletişim bilgileriniz, durumunuz ve şifreniz burada yönetilir. Uygulamanın sürümünü görür, güncellemeleri buradan elle denetleyebilirsiniz. Uygulamayı geliştirenlerin ve katkı sağlayanların bilgisi de bu sayfadadır.</p><p class="step__use"><strong>Size ne kazandırır?</strong> Çalışma arkadaşlarınız size doğru bilgilerle ulaşır. Güncelleme gerektiğinde bunu kendiniz, destek istemeden görürsünüz.</p>
             <figure class="frame frame--flat step__shot"><img src="assets/shots/profil-960.webp" srcset="assets/shots/profil-960.webp 960w, assets/shots/profil-1600.webp 1600w" sizes="92vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Profil ve Ayarlar: kimlik, iletişim, şifre ve sürüm bilgisi. Sicil ve e-posta gizlendi."></figure>
           </li>
         </ol>
