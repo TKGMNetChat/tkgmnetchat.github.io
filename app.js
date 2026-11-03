@@ -3,10 +3,10 @@
   'use strict'
   const REPO = 'TKGMNetChat/tkgmnetchat.github.io'
   const FALLBACK = {
-    version: 'v1.0.4',
-    size: 282010354,
+    version: 'v1.0.5',
+    size: 876544,
     name: 'TKGMNetChat-Kurulum.exe',
-    sha256: '1b34699177b1e0bc7ae442eb633ebd761b44382186635df26b7be2c37878842d',
+    sha256: 'b60752089c8c4e91e48a92ebae990a85d39fc6f30897fd87e393914175a3a599',
     url: `https://github.com/${REPO}/releases/latest/download/TKGMNetChat-Kurulum.exe`,
   }
   const $ = (s, r = document) => r.querySelector(s)
