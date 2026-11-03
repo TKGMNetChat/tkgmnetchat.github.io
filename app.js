@@ -3,7 +3,7 @@
   'use strict'
   const REPO = 'TKGMNetChat/tkgmnetchat.github.io'
   const FALLBACK = {
-    version: 'v1.0.5',
+    version: 'v1.0.6',
     size: 876544,
     name: 'TKGMNetChat-Kurulum.exe',
     sha256: 'b60752089c8c4e91e48a92ebae990a85d39fc6f30897fd87e393914175a3a599',
