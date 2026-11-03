@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Bağlantı Testi · TKGMNetChat</title>
+<style>
+:root{--navy:#0f2d5c;--ink:#17263b;--soft:#46586e;--amber:#d97706;--amber-deep:#b45309;--line:rgba(15,45,92,.12);--green:#0f6f4c;--red:#a32121;--grey:#4b5563;--glass:rgba(255,255,255,.8)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Arial,sans-serif;background:linear-gradient(180deg,#fbf9f4,#efe9dc) fixed;min-height:100vh}
+main{max-width:860px;margin:0 auto;padding:32px 16px 56px}
+h1{font:600 clamp(1.6rem,5vw,2.2rem)/1.2 "Iowan Old Style",Palatino,Georgia,serif;color:var(--navy);margin:0 0 8px}
+p{margin:0 0 12px;color:var(--soft)}
+.card{background:var(--glass);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--line);border-radius:20px;padding:20px;margin:16px 0;box-shadow:0 20px 44px -34px rgba(15,45,92,.5)}
+.note{font-size:.9rem}
+button{font:inherit;font-weight:600;border:0;border-radius:14px;padding:14px 28px;cursor:pointer;color:#fff;background:var(--navy);min-height:48px;transition:transform .15s cubic-bezier(.32,.72,0,1)}
+button:active{transform:scale(.97)}
+button:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+button[disabled]{opacity:.55;cursor:default}
+#start{font-size:1.15rem;padding:18px 36px;background:var(--amber-deep)}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.tbl{width:100%;border-collapse:collapse;margin-top:8px;font-size:.95rem}
+.tbl th,.tbl td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}
+.tbl th{color:var(--navy);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+.st{font-weight:700}
+.ok{color:var(--green)}.bad{color:var(--red)}.warn{color:var(--amber-deep)}.idle{color:var(--grey)}
+.addr{font-family:ui-monospace,Consolas,monospace;font-size:.82rem;color:var(--soft)}
+#out{width:100%;min-height:96px;margin-top:12px;font:.85rem/1.5 ui-monospace,Consolas,monospace;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);resize:vertical}
+@media(max-width:600px){.tbl thead{display:none}.tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}.tbl tr{border-bottom:1px solid var(--line);padding:8px 0}.tbl td{border:0;padding:2px 4px}#start{width:100%}}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>Bağlantı Testi</h1>
+<p>Bu sayfa, bulunduğunuz ağın TKGMNetChat sunucusuna ulaşıp ulaşamadığını ölçer. “Testi başlat”a basın, bitince “Sonucu kopyala” ile çıkan satırı geliştiriciye iletin.</p>
+
+<div class="card">
+  <div class="row">
+    <button id="start" type="button">Testi başlat</button>
+    <span id="prog" class="note" role="status" aria-live="polite"></span>
+  </div>
+</div>
+
+<div class="card">
+  <table class="tbl" aria-label="Sonuç tablosu">
+    <thead><tr><th>Adres</th><th>Tür</th><th>Durum</th><th>Süre</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+</div>
+
+<div class="card">
+  <div class="row"><button id="copy" type="button" disabled>Sonucu kopyala</button><span id="copied" class="note" role="status" aria-live="polite"></span></div>
+  <textarea id="out" readonly aria-label="Tek satırlık sonuç" placeholder="Test bitince sonuç burada görünür."></textarea>
+</div>
+
+<div class="card note">
+  <p><strong>Ne yapar?</strong> Yalnızca listedeki adreslere birer sağlık isteği (“/api/health”) gönderir ve cevabın gelip gelmediğine bakar. Her adres için en çok 8 saniye beklenir.</p>
+  <p><strong>Kişisel veri:</strong> Hiçbir kişisel veri, IP adresi veya sonuç toplanmaz; bu sayfadan hiçbir şey bir sunucuya kaydedilmez. Sonuç yalnızca ekranınızda ve kopyaladığınız metinde yer alır.</p>
+  <p><strong>Ölçümün sınırı:</strong> “Kendi sayfa” ve “GitHub indirme yolu” satırları cevabın içeriğini tarayıcıya okutmaz (CORS). Bu satırlar yalnızca “bağlantı kuruldu mu” bilgisini verir; kurumun bir engel sayfası gösterip göstermediğini ayırt edemez.</p>
+  <p>Bu uygulama TKGM’nin resmî uygulaması değildir, bir personelin gönüllü çalışmasıdır.</p>
+</div>
+</main>
+<script>
+"use strict";
+// mod: "saglik" (PocketBase JSON beklenir) | "metin" (cevap okunur) | "opak" (yalnız erişim ölçülür)
+var ADAYLAR = [
+  { ad: "sslip.io", adres: "https://152-70-31-206.sslip.io/api/health", tur: "doğrudan sunucu", mod: "saglik" },
+  { ad: "workers.dev", adres: "https://sunucu.tkgmnetchat.workers.dev/api/health", tur: "vekil", mod: "saglik" },
+  { ad: "Kontrol: kendi sayfa", adres: "https://tkgmnetchat.github.io/", tur: "kontrol", mod: "opak" },
+  { ad: "Kontrol: api.github.com", adres: "https://api.github.com/zen", tur: "kontrol", mod: "metin" },
+  { ad: "Kontrol: GitHub indirme yolu", adres: "https://github.com/TKGMNetChat/tkgmnetchat.github.io/releases/latest/download/latest.yml", tur: "kontrol", mod: "opak" }
+];
+var ZAMAN = 8000;
+var $ = function (id) { return document.getElementById(id); };
+var sonuclar = [];
+
+function tarayici() {
+  var u = navigator.userAgent, m;
+  if ((m = u.match(/Edg\/(\d+)/))) return "Edge " + m[1];
+  if ((m = u.match(/OPR\/(\d+)/))) return "Opera " + m[1];
+  if ((m = u.match(/Firefox\/(\d+)/))) return "Firefox " + m[1];
+  if ((m = u.match(/Chrome\/(\d+)/))) return "Chrome " + m[1];
+  if ((m = u.match(/Version\/(\d+).*Safari/))) return "Safari " + m[1];
+  return "Bilinmeyen";
+}
+
+async function olc(a) {
+  var ctl = new AbortController();
+  var zamanAsimi = false;
+  var t0 = performance.now();
+  var timer = setTimeout(function () { zamanAsimi = true; ctl.abort(); }, ZAMAN);
+  function sonuc(durum, not) { return { durum: durum, ms: Math.round(performance.now() - t0), not: not || "" }; }
+  try {
+    if (a.mod === "opak") {
+      await fetch(a.adres, { mode: "no-cors", cache: "no-store", signal: ctl.signal });
+      return sonuc("AÇILIYOR", "yalnız erişim");
+    }
+    var r = await fetch(a.adres, { mode: "cors", cache: "no-store", signal: ctl.signal });
+    var metin = await r.text();
+    if (a.mod === "metin") return r.ok && metin.length ? sonuc("AÇILIYOR") : sonuc("ENGEL/ARA SAYFA", "HTTP " + r.status);
+    var j = null;
+    try { j = JSON.parse(metin); } catch (e) {}
+    if (r.ok && j && typeof j.message === "string" && /healthy/i.test(j.message)) return sonuc("AÇILIYOR");
+    return sonuc("ENGEL/ARA SAYFA", "HTTP " + r.status + (j ? ", beklenen JSON değil" : ", JSON değil"));
+  } catch (e) {
+    if (zamanAsimi) return sonuc("ZAMAN AŞIMI");
+    return sonuc("ULAŞILAMIYOR", "ağ/TLS/CORS");
+  } finally { clearTimeout(timer); }
+}
+
+var SINIF = { "AÇILIYOR": "ok", "ENGEL/ARA SAYFA": "warn", "ULAŞILAMIYOR": "bad", "ZAMAN AŞIMI": "bad" };
+
+function cizTablo() {
+  var tb = $("rows"); tb.textContent = "";
+  ADAYLAR.forEach(function (a, i) {
+    var s = sonuclar[i], tr = document.createElement("tr");
+    function td(t, c) { var d = document.createElement("td"); d.textContent = t; if (c) d.className = c; tr.appendChild(d); return d; }
+    var d1 = td(a.ad); d1.appendChild(document.createElement("br"));
+    var sp = document.createElement("span"); sp.className = "addr"; sp.textContent = a.adres; d1.appendChild(sp);
+    td(a.tur);
+    td(s ? s.durum + (s.not ? " (" + s.not + ")" : "") : "bekliyor", "st " + (s ? SINIF[s.durum] : "idle"));
+    td(s ? s.ms + " ms" : "–");
+    tb.appendChild(tr);
+  });
+}
+
+function satir() {
+  var d = new Date(), p = function (n) { return String(n).padStart(2, "0"); };
+  var zaman = d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + " " + p(d.getHours()) + ":" + p(d.getMinutes());
+  return zaman + " | " + tarayici() + " | " + ADAYLAR.map(function (a, i) {
+    var s = sonuclar[i]; return a.ad + ": " + s.durum + (s.not ? " (" + s.not + ")" : "") + " " + s.ms + "ms";
+  }).join(" | ");
+}
+
+$("start").addEventListener("click", async function () {
+  var b = $("start"); b.disabled = true; $("copy").disabled = true; $("copied").textContent = ""; $("out").value = "";
+  sonuclar = []; cizTablo();
+  for (var i = 0; i < ADAYLAR.length; i++) {
+    $("prog").textContent = "Ölçülüyor: " + (i + 1) + " / " + ADAYLAR.length + " – " + ADAYLAR[i].ad;
+    sonuclar[i] = await olc(ADAYLAR[i]);
+    cizTablo();
+  }
+  $("prog").textContent = "Test bitti.";
+  $("out").value = satir();
+  $("copy").disabled = false; b.disabled = false; b.textContent = "Testi yeniden başlat";
+});
+
+$("copy").addEventListener("click", async function () {
+  var o = $("out"); o.select();
+  try { await navigator.clipboard.writeText(o.value); $("copied").textContent = "Kopyalandı."; }
+  catch (e) { try { document.execCommand("copy"); $("copied").textContent = "Kopyalandı."; } catch (e2) { $("copied").textContent = "Kopyalanamadı; metni elle seçip kopyalayın."; } }
+});
+
+cizTablo();
+</script>
+</body>
+</html>
